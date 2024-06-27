@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		scroll-padding: 0;
+		--radius: 6px;
+		--background-base: rgba(0,0,0,.54);
+		--background-light: #ebeaea;
+		--background-dark: #121212;
+		--background-highlight: #1a1a1a;
+		--background-press: #000000;
+		--background-elevated-base: #242424;
+		--background-menu-base: #282828;
+		--background-blur-base: #f0f8ff;
+		--background-elevated-highlight: #2a2a2a;
+		--background-elevated-press: #000000;
+		--background-white-dark: rgba(255,255,255, 0.1)
+		--background-tinted-base: rgba(255, 255, 255, 0.07);
+		--background-tinted-highlight: rgba(255, 255, 255, 0.1);
+		--background-tinted-press: rgba(255, 255, 255, 0.04);
+		--text-base: #ffffff;
+		--text-subdued: #a7a7a7;
+		--text-bright-accent: #1ed760;
+		--text-negative: #f15e6c;
+		--text-warning: #ffa42b;
+		--text-positive: #1ed760;
+		--text-announcement: #3d91f4;
+		--essential-base: #ffffff;
+		--essential-bright-accent: #1ed760;
+		--essential-negative: #e91429;
+		--essential-warning: #ffa42b;
+		--essential-positive: #1ed760;
+		--essential-announcement: #0d72ea;
+		--decorative-base: #ffffff;
+		--decorative-subdued: #292929;
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
+}
+
+@layer utilities {
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+	.no-scrollbar {
+		scroll-behavior: unset;
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+	.box-shadow-error {
+		box-shadow: inset 0 0 0 1px var(--essential-negative) !important;
+	}
+	.box-shadow-error:focus-visible {
+		outline: none;
+		box-shadow: inset 0 0 1px 3px var(--essential-negative) !important;
+	}
+	.box-shadow-error2 {
+		box-shadow: 0 1px 10px 3px var(--essential-negative) !important;
+	}
+	.box-shadow-sm {
+		box-shadow: inset 0 0 0 1px var(--decorative-base, #878787) !important;
+	}
+	.box-shadow-search:focus-visible {
+		box-shadow: 0 0 0 1px var(--decorative-subdued) !important;
+	}
+	.box-shadow-sm:focus-visible {
+		outline: none;
+		box-shadow: inset 0 0 1px 3px var(--decorative-base) !important;
+	}
+	.btn:active {
+		transition: ease-out;
+		animation: button-pop .7s linear;
+	}
+	
+	@keyframes button-pop {
+		0% {
+			transform: scale(.95)
+		}
+		40% {
+			transform: scale(1.02)
+		}
+		to {
+			transform: scale(1)
+		}
+	}
+	
+}

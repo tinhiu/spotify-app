@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id            Int         @id @default(autoincrement())
+  password      String?
+  email         String      @unique
+  display_name  String?
+  user_id       String?     @unique
+  image_url     String?
+  external_urls String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  collection    Collection?
+  track         Track?      @relation(fields: [trackPin], references: [track_id])
+  trackPin      String?
+}
+
+model Track {
+  id                Int                 @id @default(autoincrement())
+  track_id          String              @unique
+  name              String
+  artist            String
+  duration_ms       Int
+  explicit          Boolean
+  external_urls     String
+  preview_url       String?
+  image_url         String
+  type              String
+  TrackOnCollection TrackOnCollection[]
+  User              User[]
+}
+
+model Collection {
+  id                Int                 @id @default(autoincrement())
+  userId            String              @unique
+  user              User                @relation(fields: [userId], references: [user_id])
+  TrackOnCollection TrackOnCollection[]
+}
+
+model TrackOnCollection {
+  track_id      String
+  collection_id Int
+  assignedAt    DateTime   @default(now())
+  collection    Collection @relation(fields: [collection_id], references: [id])
+  track         Track      @relation(fields: [track_id], references: [track_id])
+
+  @@id([track_id, collection_id])
+}

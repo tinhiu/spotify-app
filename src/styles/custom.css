@@ -1,0 +1,24 @@
+.progress-area {
+	height: 5px;
+	width: 100%;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.progress-area:hover .progress-bar::before {
+	opacity: 1;
+}
+
+.progress-bar::before {
+	content: '';
+	position: absolute;
+	background: var(--text-negative);
+	height: 15px;
+	width: 15px;
+	border-radius: 100%;
+	top: 50%;
+	right: -5px;
+	transform: translateY(-50%);
+	opacity: 0;
+	transition: opacity ease 0.3s;
+}
